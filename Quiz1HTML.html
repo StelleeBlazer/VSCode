@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menampilkan Bilangan Prima</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    .container {
+      margin-top: 30px;
+    }
+
+    .input-container {
+      margin-bottom: 20px;
+    }
+
+    .input-container input {
+      padding: 10px;
+      width: 200px;
+    }
+
+    .btn-container {
+      margin-top: 20px;
+    }
+
+    .btn-container button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .result-container {
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Menampilkan Bilangan Prima</h1>
+  <div class="container">
+    <div class="input-container">
+      <label for="inputBilangan">Masukkan bilangan antara 0-80:</label>
+      <br>
+      <input type="text" id="inputBilangan">
+    </div>
+    <div class="btn-container">
+      <button onclick="tampilkanBilanganPrima()">Tampilkan Bilangan Prima</button>
+    </div>
+    <div class="result-container" id="resultContainer"></div>
+  </div>
+
+  <script>
+    function tampilkanBilanganPrima() {
+      var input = document.getElementById("inputBilangan").value;
+      var bilangan = parseInt(input);
+
+      if (isNaN(bilangan)) {
+        alert("Input tidak valid!");
+        return;
+      }
+
+      if (bilangan < 0 || bilangan > 80) {
+        alert("Input harus antara 0-80!");
+        return;
+      }
+
+      var bilanganPrima = [];
+
+      for (var i = 2; i <= bilangan; i++) {
+        var isPrima = true;
+
+        for (var j = 2; j < i; j++) {
+          if (i % j === 0) {
+            isPrima = false;
+            break;
+          }
+        }
+
+        if (isPrima) {
+          bilanganPrima.push(i);
+        }
+      }
+
+      var resultContainer = document.getElementById("resultContainer");
+
+      if (bilanganPrima.length === 0) {
+        resultContainer.textContent = "Tidak ada bilangan prima antara 0-" + bilangan + "!";
+      } else {
+        resultContainer.textContent = "Bilangan prima antara 0-" + bilangan + " adalah: " + bilanganPrima.join(", ");
+      }
+    }
+  </script>
+</body>
+</html>

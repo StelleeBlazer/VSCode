@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DAFTAR GAJI KARYAWAN</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 200px;
+    }
+
+    button {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    span {
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>DAFTAR GAJI KARYAWAN</h2>
+  <form id="formKaryawan">
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama">
+    <br>
+    <label for="departemen">Departemen:</label>
+    <input type="text" id="departemen">
+    <br>
+    <label for="golongan">Golongan:</label>
+    <input type="number" id="golongan" min="1" max="3">
+    <br>
+    <button type="button" onclick="hitungGaji()">Hitung Gaji</button>
+  </form>
+  <ul>
+    <li>Nama: <span id="namaKaryawan"></span></li>
+    <li>Departemen: <span id="departemenKaryawan"></span></li>
+    <li>Golongan: <span id="golonganKaryawan"></span></li>
+    <li>Gaji Pokok: <span id="gajiPokok"></span></li>
+    <li>Tunjangan Jabatan: <span id="tunjanganJabatan"></span></li>
+    <li>Tunjangan Kesejahteraan: <span id="tunjanganKesejahteraan"></span></li>
+  </ul>
+  <p>Gaji Bersih Karyawan: <span id="gajiBersih"></span></p>
+
+  <script>
+    function hitungGaji() {
+      const nama = document.getElementById("nama").value;
+      const departemen = document.getElementById("departemen").value;
+      const golongan = parseInt(document.getElementById("golongan").value);
+
+      let gajiPokok;
+      let persentaseTunjanganJabatan;
+      let persentaseTunjanganKesejahteraan;
+
+      if (golongan === 1) {
+        gajiPokok = 5000000;
+        persentaseTunjanganJabatan = 0.25;
+        persentaseTunjanganKesejahteraan = 0.2;
+      } else if (golongan === 2) {
+        gajiPokok = 4000000;
+        persentaseTunjanganJabatan = 0.2;
+        persentaseTunjanganKesejahteraan = 0.15;
+      } else if (golongan === 3) {
+        gajiPokok = 2000000;
+        persentaseTunjanganJabatan = 0.15;
+        persentaseTunjanganKesejahteraan = 0.1;
+      } else {
+        alert("Golongan yang Anda masukkan tidak valid!");
+        return;
+      }
+
+      const tunjanganJabatan = gajiPokok * persentaseTunjanganJabatan;
+      const tunjanganKesejahteraan = gajiPokok * persentaseTunjanganKesejahteraan;
+
+      const gajiBersih = gajiPokok + tunjanganJabatan + tunjanganKesejahteraan;
+
+      document.getElementById("namaKaryawan").textContent = nama;
+      document.getElementById("departemenKaryawan").textContent = departemen;
+      document.getElementById("golonganKaryawan").textContent = golongan;
+      document.getElementById("gajiPokok").textContent = gajiPokok;
+      document.getElementById("tunjanganJabatan").textContent = tunjanganJabatan;
+      document.getElementById("tunjanganKesejahteraan").textContent = tunjanganKesejahteraan;
+      document.getElementById("gajiBersih").textContent = gajiBersih;
+    }
+  </script>
+</body>
+</html>
